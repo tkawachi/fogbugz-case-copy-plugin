@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+    "name": "Fogbugz case copy",
+    "description": "This extension copies a case link to clipboard",
+    "version": "1.0",
+
+    "icons": {
+	"16": "clip16.png",
+        "48": "clip48.png",
+        "128": "clip128.png"
+    },
+
+    "page_action": {
+	"default_icon": "clip19.png",
+	"default_popup": "popup.html"
+    },
+
+    "background": {
+	"page": "background.html"
+    },
+
+    "permissions": [
+	"clipboardWrite",
+	"tabs"
+    ],
+
+    "content_scripts":[
+	{
+	    "matches":["https://*.fogbugz.com/*"],
+	    "js":["contentscript.js", "jquery-2.0.1.min.js"]
+	}
+    ]
+}
