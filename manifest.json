@@ -27,7 +27,7 @@
     "content_scripts":[
 	{
 	    "matches":["https://*.fogbugz.com/*"],
-	    "js":["jquery-2.0.1.min.js", "contentscript.js"]
+	    "js":["jquery-2.0.1.min.js", "shared.js", "contentscript.js"]
 	}
     ]
 }

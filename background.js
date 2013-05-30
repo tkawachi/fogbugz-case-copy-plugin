@@ -1,16 +1,16 @@
 var workingEl, workingElId = "copy-div";
-var casePageUrlRe = /^(.+\.fogbugz\.com\/default\.asp\?\d+)/;
 
 $(function() {
     workingEl = $("#" + workingElId);
 });
 
-function copyLink(link) {
-    console.log("copyLink()");
-    // Add <a> tag to workingEl
-    var el = $("<a />").attr("href", link.url).text(link.title);
+function createA(link) {
+   return $("<a />").attr("href", link.url).text(link.title);
+ }
+
+function copyEl(jQueryEl) {
     workingEl.empty();
-    workingEl.append(el);
+    workingEl.append(jQueryEl);
 
     // select the created element
     var range = document.createRange();
@@ -22,16 +22,35 @@ function copyLink(link) {
     document.execCommand("Copy", false, null);
 }
 
+function copyLink(link) {
+    console.log("copyLink()", link);
+    copyEl(createA(link));
+}
+
+function copyLinks(links) {
+    console.log("copyLinks()", links);
+    var ul = $("<ul />");
+    for (var i = 0; i < links.length; i++) {
+	var link = links[i];
+	var li = $("<li />")
+	li.append(createA(link))
+	ul.append(li)
+    }
+    copyEl(ul);
+}
+
 chrome.extension.onMessage.addListener(function (msg, sender, sendResponse) {
     console.log(msg);
     if (msg.command == "copyLink") {
 	copyLink(msg.link);
+    } else if (msg.command == "copyLinks") {
+	copyLinks(msg.links);
     }
     sendResponse();
 });
 
 chrome.tabs.onUpdated.addListener(function(id, changeInfo, tab) {
-    if (casePageUrlRe.test(tab.url)) {
+    if (casePageUrlRe.test(tab.url) || listPageUrlRe.test(tab.url)) {
 	chrome.pageAction.show(id);
     }
 });
