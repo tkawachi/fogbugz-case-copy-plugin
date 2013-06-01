@@ -29,5 +29,13 @@
 	    "matches":["https://*.fogbugz.com/*"],
 	    "js":["jquery-2.0.1.min.js", "shared.js", "contentscript.js"]
 	}
-    ]
+    ],
+
+    "commands": {
+	"_execute_page_action": {
+	    "suggested_key": {
+		"default": "Ctrl+Shift+C"
+	    }
+	}
+    }
 }

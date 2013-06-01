@@ -50,6 +50,7 @@ chrome.extension.onMessage.addListener(function (msg, sender, sendResponse) {
 });
 
 chrome.tabs.onUpdated.addListener(function(id, changeInfo, tab) {
+//    console.log(tab.url);
     if (casePageUrlRe.test(tab.url) || listPageUrlRe.test(tab.url)) {
 	chrome.pageAction.show(id);
     }
