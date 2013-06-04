@@ -5,8 +5,8 @@ $(function() {
 });
 
 function createA(link) {
-   return $("<a />").attr("href", link.url).text(link.title);
- }
+    return $("<a />").attr("href", link.url).text(link.title);
+}
 
 function copyEl(jQueryEl) {
     workingEl.empty();

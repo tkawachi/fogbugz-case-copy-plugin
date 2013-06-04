@@ -5,11 +5,12 @@ var isWin = navigator.userAgent.indexOf('Win') >= 0;
 
 function copyFromPage(sendResponse) {
     if (casePageUrlRe.exec(document.location.href)) {
+	var url = RegExp.$1;
 	var title = $("title").text().replace(" - FogBugz", "");
 	chrome.extension.sendMessage({
 	    command: "copyLink",
 	    link: {
-		url: RegExp.$1,
+		url: url,
 		title: title
 	    }
 	}, function(resp) {
